@@ -150,6 +150,71 @@
             background: #d1ecf1;
             color: #0c5460;
         }
+
+        .auth-card {
+            max-width: 440px;
+            margin: 20px auto;
+        }
+
+        .auth-card h1 {
+            margin-top: 0;
+            color: #8f1b1b;
+            text-align: center;
+        }
+
+        .auth-card form p {
+            margin-bottom: 16px;
+        }
+
+        .auth-card input[type="text"],
+        .auth-card input[type="password"] {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #d5c8bc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .auth-card ul {
+            color: #6b625c;
+            font-size: 14px;
+        }
+
+        .auth-card .errorlist {
+            color: #721c24;
+            padding-left: 18px;
+        }
+
+        .auth-card form button,
+        .auth-card .logout-button {
+            width: 100%;
+            background: #b22222;
+            color: white;
+            padding: 11px 18px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .auth-card form button:hover,
+        .auth-card .logout-button:hover {
+            background: #8f1b1b;
+        }
+
+        .auth-card .auth-link {
+            text-align: center;
+            margin-top: 18px;
+        }
+
+        .auth-card .cancel-link {
+            display: block;
+            margin-top: 12px;
+            text-align: center;
+        }
     </style>
 
 </head>
@@ -161,10 +226,7 @@
         <div class="nav-right">
             {% if user.is_authenticated %}
             <span>{{user.username}}</span>
-            <form method="POST" action="{% url "accounts:logout" %}">
-                {%csrf_token%}
-                <button type="submit">Log out</button>
-            </form>
+            <a href="{% url 'accounts:logout' %}">Вийти</a>
             {% else %}
                 <a href="{% url "accounts:login" %}">Log in</a>
                 <a href="{% url "accounts:register" %}">Registrate account</a>

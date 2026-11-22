@@ -3,11 +3,16 @@
     Registration
 {%endblock%}
 {% block content %} 
-    <h1>Registration</h1>
+<article class="card auth-card">
+    <h1>Реєстрація</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Registrate</button>
+        <button type="submit">Створити акаунт</button>
     </form>
-    <p>Already have an account? <a href="{% url 'accounts:login' %}">Log in</a></p>
+    <p class="auth-link">
+        Вже є акаунт?
+        <a href="{% url 'accounts:login' %}">Увійти</a>
+    </p>
+</article>
 {% endblock %}

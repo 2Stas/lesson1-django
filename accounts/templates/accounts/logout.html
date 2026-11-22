@@ -1,0 +1,17 @@
+{% extends "menu/base.html" %}
+
+{% block title %}Вихід з акаунту{% endblock %}
+
+{% block content %}
+<article class="card auth-card">
+    <h1>Вийти з акаунту?</h1>
+    <p>Підтвердьте вихід, щоб завершити поточний сеанс.</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="logout-button">Вийти</button>
+    </form>
+    <a class="cancel-link" href="{% url 'menu:menu_list' %}">
+        Скасувати та повернутися до меню
+    </a>
+</article>
+{% endblock %}

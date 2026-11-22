@@ -3,12 +3,17 @@
     Log in
 {%endblock%}
 {% block content %} 
-    <h1>Log in</h1>
+<article class="card auth-card">
+    <h1>Вхід в акаунт</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="hidden" name="next" value="{{next}}"/>
-        <button type="submit">Log in</button>
+        <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit">Увійти</button>
     </form>
-    <p>Don't have account? <a href="{% url 'accounts:register' %}">Register</a></p>
+    <p class="auth-link">
+        Ще немає акаунту?
+        <a href="{% url 'accounts:register' %}">Зареєструватися</a>
+    </p>
+</article>
 {% endblock %}
