@@ -1,0 +1,24 @@
+
+{% extends "menu/base.html" %}
+
+{% block title %}Видалення страви — Піцерія{% endblock %}
+
+{% block content %}
+<article class="card">
+    <h1>Видалення страви</h1>
+
+    <p>
+        Ти справді хочеш видалити страву
+        <strong>{{ dish.name }}</strong>?
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Так, видалити</button>
+
+        <a href="{% url 'menu:dish_detail' dish_id=dish.id %}">
+            Скасувати
+        </a>
+    </form>
+</article>
+{% endblock %}

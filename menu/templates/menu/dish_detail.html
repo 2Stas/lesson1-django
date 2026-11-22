@@ -1,0 +1,40 @@
+
+{% extends "menu/base.html" %}
+
+{% block title %}{{ dish.name }} — Піцерія{% endblock %}
+
+{% block content %}
+<article class="card">
+    <h1>{{ dish.name }}</h1>
+
+    <p>{{ dish.description|default:"Опис відсутній" }}</p>
+
+    <p class="price">{{ dish.price }} грн</p>
+
+    <p>
+        {% if dish.is_available %}
+            Є в наявності
+        {% else %}
+            Немає в наявності
+        {% endif %}
+    </p>
+
+    <p>
+        <a href="{% url 'menu:menu_list' %}">
+            Повернутися до меню
+        </a>
+    </p>
+
+    <hr>
+
+    <p>
+        <a href="{% url 'menu:dish_update' dish_id=dish.id %}">
+            <button type="button">Редагувати</button>
+        </a>
+
+        <a href="{% url 'menu:dish_delete' dish_id=dish.id %}">
+            <button type="button">Видалити</button>
+        </a>
+    </p>
+</article>
+{% endblock %}

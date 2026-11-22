@@ -1,0 +1,96 @@
+
+{% extends "menu/base.html" %}
+
+{% block title %}{{ title }} — Піцерія{% endblock %}
+
+{% block content %}
+<article class="card">
+    <h1>{{ title }}</h1>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        <p>
+            <label for="name">Назва страви:</label><br>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                maxlength="150"
+                value="{{ values.name }}"
+                required
+            >
+        </p>
+
+        <p>
+            <label for="description">Опис:</label><br>
+            <textarea
+                id="description"
+                name="description"
+                rows="4"
+            >{{ values.description }}</textarea>
+        </p>
+
+        <p>
+            <label for="price">Ціна, грн:</label><br>
+            <input
+                type="number"
+                id="price"
+                name="price"
+                min="0.01"
+                max="99999.99"
+                step="0.01"
+                value="{{ values.price }}"
+                required
+            >
+        </p>
+
+        <p>
+            <label for="category">Категорія:</label><br>
+            <select id="category" name="category" required>
+                <option value="">Обери категорію</option>
+
+                {% for category in categories %}
+                    <option
+                        value="{{ category.id }}"
+                        {% if values.category_id == category.id|stringformat:"s" %}selected{% endif %}
+                    >
+                        {{ category.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </p>
+
+        <p>
+            <label>
+                <input
+                    type="checkbox"
+                    name="is_available"
+                    {% if values.is_available %}checked{% endif %}
+                >
+                Є в наявності
+            </label>
+        </p>
+
+        <button type="submit">Зберегти</button>
+
+        {% if dish %}
+            <p>
+                <a href="{% url 'menu:dish_detail' dish_id=dish.id %}">
+                    Скасувати
+                </a>
+            </p>
+        {% else %}
+            <p>
+                <a href="{% url 'menu:menu_list' %}">
+                    Повернутися до меню
+                </a>
+            </p>
+        {% endif %}
+    </form>
+</article>
+{% endblock %}
